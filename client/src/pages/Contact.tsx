@@ -3,11 +3,39 @@ import { ContactForm } from '@/components/ContactForm';
 import { Card } from '@/components/ui/card';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 import type { InsertContact } from '@shared/schema';
+import { useMutation } from '@tanstack/react-query';
+import { apiRequest } from '@/lib/queryClient';
+import { useToast } from '@/hooks/use-toast';
 
 export default function Contact() {
+  const { toast } = useToast();
+
+  // Mutation for submitting contact form
+  const submitMutation = useMutation({
+    mutationFn: async (data: InsertContact) => {
+      return await apiRequest('/api/contacts', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json' },
+      });
+    },
+    onSuccess: () => {
+      toast({
+        title: 'Message Sent!',
+        description: 'We\'ve received your message and will get back to you soon.',
+      });
+    },
+    onError: () => {
+      toast({
+        title: 'Error',
+        description: 'Failed to send your message. Please try again.',
+        variant: 'destructive',
+      });
+    },
+  });
+
   const handleSubmitContact = async (data: InsertContact) => {
-    // This will be connected to the backend in Task 3
-    console.log('Contact form submitted:', data);
+    await submitMutation.mutateAsync(data);
   };
 
   const contactInfo = [

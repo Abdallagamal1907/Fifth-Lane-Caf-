@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Send, Check } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -34,10 +34,15 @@ export function ContactForm({ onSubmit }: ContactFormProps) {
   });
 
   const handleSubmit = async (data: InsertContact) => {
-    await onSubmit(data);
-    setIsSubmitted(true);
-    form.reset();
-    setTimeout(() => setIsSubmitted(false), 3000);
+    try {
+      await onSubmit(data);
+      setIsSubmitted(true);
+      form.reset();
+      setTimeout(() => setIsSubmitted(false), 3000);
+    } catch (error) {
+      // Error is already handled by the mutation's onError callback
+      console.error('Failed to submit contact form:', error);
+    }
   };
 
   return (

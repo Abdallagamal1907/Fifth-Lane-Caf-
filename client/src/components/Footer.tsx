@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Coffee, Phone, Mail, MapPin, Facebook, Instagram, Twitter, ArrowUp } from 'lucide-react';
 import { Link } from 'wouter';
 import { Button } from '@/components/ui/button';

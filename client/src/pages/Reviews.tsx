@@ -1,42 +1,47 @@
-import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { TestimonialCarousel } from '@/components/TestimonialCarousel';
 import { TestimonialForm } from '@/components/TestimonialForm';
 import { Card } from '@/components/ui/card';
-import type { InsertTestimonial } from '@shared/schema';
-
-// Sample testimonials for display
-const sampleTestimonials = [
-  {
-    id: '1',
-    name: 'Sarah Ahmed',
-    rating: '5',
-    comment: 'The best coffee in 10th of Ramadan! The Rose Latte is absolutely divine, and the atmosphere is so cozy and welcoming. Fifth Lane has become my go-to spot for work and relaxation.'
-  },
-  {
-    id: '2',
-    name: 'Mohamed Hassan',
-    rating: '5',
-    comment: 'Exceptional quality and service. The baristas really know their craft, and you can taste the difference. The Spiced Cardamom Cappuccino is a must-try!'
-  },
-  {
-    id: '3',
-    name: 'Layla Ibrahim',
-    rating: '5',
-    comment: 'A hidden gem in our neighborhood! The interior is beautiful, the coffee is fantastic, and the pastries are always fresh. Highly recommend the croissants!'
-  },
-];
+import type { InsertTestimonial, Testimonial } from '@shared/schema';
+import { useQuery, useMutation } from '@tanstack/react-query';
+import { apiRequest, queryClient } from '@/lib/queryClient';
+import { useToast } from '@/hooks/use-toast';
 
 export default function Reviews() {
-  const [testimonials, setTestimonials] = useState(sampleTestimonials);
+  const { toast } = useToast();
+
+  // Fetch testimonials from backend
+  const { data: testimonials = [], isLoading } = useQuery<Testimonial[]>({
+    queryKey: ['/api/testimonials'],
+  });
+
+  // Mutation for submitting testimonials
+  const submitMutation = useMutation({
+    mutationFn: async (data: InsertTestimonial) => {
+      return await apiRequest('/api/testimonials', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json' },
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/testimonials'] });
+      toast({
+        title: 'Success!',
+        description: 'Your review has been submitted. Thank you for your feedback!',
+      });
+    },
+    onError: () => {
+      toast({
+        title: 'Error',
+        description: 'Failed to submit your review. Please try again.',
+        variant: 'destructive',
+      });
+    },
+  });
 
   const handleSubmitTestimonial = async (data: InsertTestimonial) => {
-    // This will be connected to the backend in Task 3
-    const newTestimonial = {
-      id: Date.now().toString(),
-      ...data,
-    };
-    setTestimonials([...testimonials, newTestimonial]);
+    await submitMutation.mutateAsync(data);
   };
 
   return (
@@ -60,7 +65,18 @@ export default function Reviews() {
 
       {/* Testimonials Carousel */}
       <section className="max-w-5xl mx-auto px-4 mb-20" data-testid="section-testimonials">
-        <TestimonialCarousel testimonials={testimonials} />
+        {isLoading ? (
+          <Card className="p-12 text-center">
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+              className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full mx-auto"
+            />
+            <p className="mt-4 text-muted-foreground">Loading testimonials...</p>
+          </Card>
+        ) : (
+          <TestimonialCarousel testimonials={testimonials} />
+        )}
       </section>
 
       {/* Submit Review Form */}

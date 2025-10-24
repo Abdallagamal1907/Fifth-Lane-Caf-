@@ -123,7 +123,7 @@ export default function About() {
             {
               icon: Users,
               title: 'Community Focus',
-              description: 'We're committed to creating a space where everyone feels welcome and valued.'
+              description: "We're committed to creating a space where everyone feels welcome and valued."
             },
             {
               icon: Heart,

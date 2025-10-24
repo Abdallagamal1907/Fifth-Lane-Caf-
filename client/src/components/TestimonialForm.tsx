@@ -35,11 +35,16 @@ export function TestimonialForm({ onSubmit }: TestimonialFormProps) {
   });
 
   const handleSubmit = async (data: InsertTestimonial) => {
-    await onSubmit(data);
-    setIsSubmitted(true);
-    form.reset();
-    setRating(0);
-    setTimeout(() => setIsSubmitted(false), 3000);
+    try {
+      await onSubmit(data);
+      setIsSubmitted(true);
+      form.reset();
+      setRating(0);
+      setTimeout(() => setIsSubmitted(false), 3000);
+    } catch (error) {
+      // Error is already handled by the mutation's onError callback
+      console.error('Failed to submit testimonial:', error);
+    }
   };
 
   return (

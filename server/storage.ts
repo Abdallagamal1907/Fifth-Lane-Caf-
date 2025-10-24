@@ -20,6 +20,39 @@ export class MemStorage implements IStorage {
   constructor() {
     this.testimonials = new Map();
     this.contacts = new Map();
+    
+    // Seed with default testimonials for better initial experience
+    this.seedDefaultTestimonials();
+  }
+
+  private seedDefaultTestimonials() {
+    const defaultTestimonials = [
+      {
+        id: '1',
+        name: 'Sarah Ahmed',
+        rating: '5',
+        comment: 'The best coffee in 10th of Ramadan! The Rose Latte is absolutely divine, and the atmosphere is so cozy and welcoming. Fifth Lane has become my go-to spot for work and relaxation.',
+        createdAt: new Date('2024-10-20'),
+      },
+      {
+        id: '2',
+        name: 'Mohamed Hassan',
+        rating: '5',
+        comment: 'Exceptional quality and service. The baristas really know their craft, and you can taste the difference. The Spiced Cardamom Cappuccino is a must-try!',
+        createdAt: new Date('2024-10-21'),
+      },
+      {
+        id: '3',
+        name: 'Layla Ibrahim',
+        rating: '5',
+        comment: 'A hidden gem in our neighborhood! The interior is beautiful, the coffee is fantastic, and the pastries are always fresh. Highly recommend the croissants!',
+        createdAt: new Date('2024-10-22'),
+      },
+    ];
+
+    defaultTestimonials.forEach((testimonial) => {
+      this.testimonials.set(testimonial.id, testimonial);
+    });
   }
 
   async createTestimonial(insertTestimonial: InsertTestimonial): Promise<Testimonial> {

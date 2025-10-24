@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight, MapPin, Phone } from 'lucide-react';
+import { ArrowRight, MapPin, Phone, Coffee } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useRef } from 'react';
 
