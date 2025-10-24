@@ -1,0 +1,255 @@
+Complete English Prompt — build a fully animated café website (copy-paste ready)
+
+Use this prompt to give to a developer, a frontend AI generator, or an agency. It contains all site content, images, menu, location, phone placeholders, and very detailed animation & interaction requirements. Replace any placeholder phone/email with your real ones before production.
+
+Project summary (one sentence):
+Build a modern, vibrant, fully animated responsive website for Fifth Lane Café located in 10th of Ramadan — Fifth District (El-Mogawra El-Khamisa). Everything must be in English.
+
+PROMPT (paste this as a single request)
+
+Build a production-ready, responsive, accessible, SEO-friendly website for Fifth Lane Café (brand name) in 10th of Ramadan City (Fifth District, El-Mogawra El-Khamisa), Egypt. The site must be fully in English and must feel modern, warm and energetic. Use React + Next.js (or React SPA if preferred), Tailwind CSS, and Framer Motion for primary animations. You may use GSAP for complex timeline sequencing and Lottie for small decorative micro-animations. Provide clean, well-documented code, componentized structure, and build/deploy instructions.
+
+Pages & structure
+
+Home (Hero, Signature, Why Us, Menu highlights, CTA)
+
+Menu (full menu with categories and item descriptions and prices placeholders)
+
+About (story, mission, vision)
+
+Gallery (grid + lightbox)
+
+Reviews / Testimonials (with submission form)
+
+Contact & Location (address, map embed, phone numbers, contact form, opening hours)
+
+Opening Hours (detailed)
+
+Online Order (placeholder: "Coming Soon")
+
+404 + Privacy/Terms basic pages
+
+Brand & copy (use exactly)
+
+Name: Fifth Lane Café
+Hero headline: Welcome to Fifth Lane Café
+Hero subheadline: Crafting warmth in every cup — specialty coffee, handcrafted drinks, and a cozy place to connect in 10th of Ramadan.
+CTAs: View Menu, Book a Table, Get Directions
+
+Address (English): Fifth District (El-Mogawra El-Khamisa), 10th of Ramadan City, Sharqia Governorate, Egypt
+Opening hours:
+
+Monday – Friday: 08:00 AM – 10:00 PM
+
+Saturday – Sunday: 09:00 AM – 12:00 AM
+
+Phone placeholders (replace with real):
+
+Main: +20 10 1234 5678
+
+Reservations: +20 10 8765 4321
+Email placeholder: hello@fifthlanecafe.com
+
+Full Menu content (copy exactly; include short descriptions)
+
+(Include prices as placeholders, e.g., EGP XX)
+
+Hot Coffee
+
+Espresso — Pure, concentrated coffee with a rich crema.
+
+Americano — Espresso balanced with hot water for a clean, bold cup.
+
+Cappuccino — Espresso with steamed milk and a silky foam crown.
+
+Flat White — Smooth micro-foamed milk over a double ristretto.
+
+Café Mocha — Espresso, chocolate, steamed milk, whipped finish.
+
+Turkish Coffee — Traditional, finely ground, aromatic.
+
+Cold Coffee
+
+Iced Latte — Double espresso, chilled milk, served over ice.
+
+Cold Brew — Slow-steeped for sweetness and low acidity.
+
+Nitro Cold Brew — Infused with nitrogen for a creamy, stout-like texture.
+
+Iced Caramel Macchiato — Layered espresso, milk, caramel drizzle.
+
+Affogato — Espresso poured over vanilla gelato.
+
+Fresh Juices & Smoothies
+
+Sunrise Orange — Fresh-squeezed oranges, hint of mint.
+
+Green Boost — Kale, green apple, cucumber, lemon.
+
+Berry Bliss Smoothie — Mixed berries, banana, almond milk.
+
+Mango Lassi — Creamy mango, yogurt, touch of cardamom.
+
+Milkshakes & Desserts
+
+Classic Vanilla Shake — Creamy, thick, with whipped cream.
+
+Chocolate Overload — Rich chocolate shake topped with cocoa dust.
+
+Pastries — Butter croissant, almond croissant, pain au chocolat.
+
+Signature Cake — Rotating seasonal cake (ask at counter).
+
+Signature Creations
+
+Fifth Lane Nitro — Cold drip with citrus infusion and silky foam.
+
+Rose Latte — Espresso, steamed milk, fragrant rose syrup, gold dust (optional).
+
+Spiced Cardamom Capp — Cappuccino with a hint of cardamom and orange zest.
+
+Gallery & images
+
+Provide 24–30 images total: 6–8 hero/background images (high-res), 18–22 gallery images (product, barista, interior, lifestyle).
+
+Recommended image sizes: hero/background 1920×1080 or 2560×1440; gallery 1200×800 or 800×600 compressed WebP.
+
+Use Unsplash/Pexels stock initially, and allow easy replacement with client photos. Provide suggested filenames: hero-01.jpg, interior-wide-01.jpg, barista-espresso-01.jpg, pastry-01.jpg, street-10thramadan-01.jpg, etc.
+
+Accessibility & performance
+
+Images lazy-loaded with low-res blur-up placeholders.
+
+Provide prefers-reduced-motion fallback: reduce/disable non-essential motion.
+
+Semantic HTML, ARIA where needed, accessible forms, keyboard navigable modals (gallery lightbox, nav).
+
+Lighthouse score target: >= 90 performance and accessibility where possible.
+
+Animation & interaction requirements — THE MOST IMPORTANT PART
+
+Make every visible element have thoughtful motion. Prioritize smooth, performant animations and micro-interactions. Use Framer Motion (preferred) for component animations and GSAP only for advanced timeline control if needed. Use Lottie for decorative icon animations.
+
+Global animation philosophy: warm, snappy, slightly playful — fast micro-interactions (80–200ms) for hover states; slower reveal motions (300–700ms) for scroll entrance. Respect prefers-reduced-motion.
+
+Specific animation list (implement all)
+
+Hero
+
+Parallax background layers: background image moves slower than foreground text on scroll (subtle).
+
+Large headline: entrance animation — split text reveal (mask/clip) with stagger (use Framer Motion staggerChildren).
+
+CTA buttons: continuous but subtle hover pulse + micro-translateY and micro-shadow on hover.
+
+Decorative Lottie steam animation above cup icon near headline.
+
+Navigation
+
+Smooth slide-in mobile nav from right with backdrop blur.
+
+Active nav item underline: animated SVG line draw.
+
+On scroll, nav transitions from transparent to semi-opaque with smooth color/height change.
+
+Hero & Background overlays
+
+Animated gradient overlays (subtle shifting) and an optional particle field (very light) for hero background; particles reduce or stop on mobile/low-power devices.
+
+Section scroll reveals
+
+Each section uses fade + slide up with 50–100ms stagger between children.
+
+Cards reveal with 3D tilt perspective on hover (small rotateX / rotateY) and subtle shadow lift.
+
+Menu items/cards
+
+Card hover: scale to 1.03, translateY -6px, box-shadow deepens, and a hover micro-illustration (Lottie) or svg flourish appears.
+
+Price and short description animate into view on hover (slide left + fade).
+
+Add to Order / More Info button: ripple/ink effect on click (CSS + JS) and pressed animation (scale down 0.98).
+
+Image interactions
+
+Gallery images: hover zoom (scale 1.06) + parallax sub-layer movement based on mouse position (subtle).
+
+Lightbox open: image zoom-in with fade, background blur, and close button morph animation.
+
+Lazy images: use blur-up placeholder that crossfades to full-res.
+
+Buttons & CTAs
+
+Hover: translateY(-4px), shadow grow, and a small color gradient sweep animation across text.
+
+Primary CTAs have micro-bounce on entrance and gentle breathing animation when idle (very subtle).
+
+Forms & Inputs
+
+Input focus: animated underline/or floating label transition.
+
+Submit button: progress indicator animation (linear bar or spinner) on submit, success checkmark morph animation on complete.
+
+Map & Location
+
+Animated pin drop on map load; location card slides in from map edge.
+
+Hovering on address reveals small animated route line.
+
+Testimonials
+
+Carousel with animated card entrance, auto-advance with pause on hover; testimonial card flip/slide animation.
+
+Footer
+
+Social icons: hover micro-animations (scale, rotate, or icon-specific Lottie).
+
+Back to top: floating animated button that pulses then hides on scroll down.
+
+Micro-interactions everywhere
+
+Links have animated underlines, icons have tiny hover transforms, toast messages slide and fade with progress bar.
+
+Advanced transitions
+
+Route transitions (if using Next.js): page transition animations with shared element transitions for hero images (Framer Motion layoutId).
+
+Use Timeline sequencing for complex flows (GSAP or Framer Motion useAnimation).
+
+Performance & progressive enhancement
+
+Limit concurrent animations; use will-change responsibly.
+
+Disable heavy effects on small viewports or when prefers-reduced-motion is set.
+
+Use hardware-accelerated transforms (translateZ, transform) instead of animating top/left where possible.
+
+Provide a toggle in site settings to reduce / disable animations.
+
+Developer notes & deliverables
+
+Provide source code (Git repo) with proper README and deployment steps (Vercel / Netlify instructions).
+
+Include a components library (Button, Card, Modal, Nav, Gallery, MenuCard) and storybook snapshots or usage examples.
+
+Provide a lightweight CSS variables theme (colors, spacing, type scale).
+
+Provide a list of stock image links (30 images) used and guidelines for replacing with client photography.
+
+Provide a one-page “Animation spec” document mapping each animation to components and durations/easings.
+
+Provide optional production build with image optimization (Next/Image or equivalent) and critical CSS inline for first paint.
+
+Acceptance criteria
+
+Desktop, tablet, and mobile responsive with tested interactions on Chrome, Firefox, Safari (iOS/Android).
+
+All pages present the given English copy exactly and menu items as above.
+
+Animations look smooth (60fps where possible), respect reduced-motion, and degrade gracefully.
+
+Code is modular, commented, and ready for handoff.
+
+Quick developer hint (short)
+
+If you implement with Next.js + Tailwind + Framer Motion + Lottie + optionally GSAP, you’ll easily meet the visual and animation requirements and have a maintainable codebase. Use Framer Motion for route transitions and shared element animations (layoutId). Use IntersectionObserver to trigger scroll reveals.
