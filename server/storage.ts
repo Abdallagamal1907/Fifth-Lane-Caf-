@@ -1,37 +1,57 @@
-import { type User, type InsertUser } from "@shared/schema";
+import { 
+  type Testimonial, 
+  type InsertTestimonial,
+  type ContactSubmission,
+  type InsertContact
+} from "@shared/schema";
 import { randomUUID } from "crypto";
 
-// modify the interface with any CRUD methods
-// you might need
-
 export interface IStorage {
-  getUser(id: string): Promise<User | undefined>;
-  getUserByUsername(username: string): Promise<User | undefined>;
-  createUser(user: InsertUser): Promise<User>;
+  createTestimonial(testimonial: InsertTestimonial): Promise<Testimonial>;
+  getAllTestimonials(): Promise<Testimonial[]>;
+  createContactSubmission(contact: InsertContact): Promise<ContactSubmission>;
+  getAllContactSubmissions(): Promise<ContactSubmission[]>;
 }
 
 export class MemStorage implements IStorage {
-  private users: Map<string, User>;
+  private testimonials: Map<string, Testimonial>;
+  private contacts: Map<string, ContactSubmission>;
 
   constructor() {
-    this.users = new Map();
+    this.testimonials = new Map();
+    this.contacts = new Map();
   }
 
-  async getUser(id: string): Promise<User | undefined> {
-    return this.users.get(id);
-  }
-
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
-  }
-
-  async createUser(insertUser: InsertUser): Promise<User> {
+  async createTestimonial(insertTestimonial: InsertTestimonial): Promise<Testimonial> {
     const id = randomUUID();
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
-    return user;
+    const testimonial: Testimonial = {
+      ...insertTestimonial,
+      id,
+      createdAt: new Date(),
+    };
+    this.testimonials.set(id, testimonial);
+    return testimonial;
+  }
+
+  async getAllTestimonials(): Promise<Testimonial[]> {
+    return Array.from(this.testimonials.values())
+      .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+  }
+
+  async createContactSubmission(insertContact: InsertContact): Promise<ContactSubmission> {
+    const id = randomUUID();
+    const contact: ContactSubmission = {
+      ...insertContact,
+      id,
+      createdAt: new Date(),
+    };
+    this.contacts.set(id, contact);
+    return contact;
+  }
+
+  async getAllContactSubmissions(): Promise<ContactSubmission[]> {
+    return Array.from(this.contacts.values())
+      .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
   }
 }
 
